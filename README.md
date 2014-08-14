@@ -1,4 +1,4 @@
-# README #
+# Squad leader README #
 
 If you do any serious Android development, you've probably used [ProGuard](proguard.sourceforge.net/index.html) to obfuscate, optimise and shrink your application. In that case it's also very likely that ProGuarding your app has broken your release builds, took a few hours of your time away while pulling your hair out.
 
@@ -62,7 +62,7 @@ For libraries that are published as a jar contributions are welcome. When contri
 
 * Add a new rules file under `src/main/rules` and include _all_ ProGuard configuration needed for the library, even if some of that is already in other rules files. The ProGuard rules should be as specific as possible!
 * Add the new rule file in `build.gradle` to the existing set of rules.
-* If possible, extend the `verification` project so that you can verify that your rule works.
+* If possible, extend the `verification` project so that you can verify that your rule works, by looking at the ProGuard mapping.txt (Suggestions on automating this are very welcome).
 * Send a pull request with your changes, describing what it should do.
 
 It's also OK to create an issue if the above is too challenging.
