@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+apply from: '../maven-publish.gradle'
+
+version = "1.0-SNAPSHOT"
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "nl.littlerobots.squadleader"
+        minSdkVersion 1
+        targetSdkVersion 20
+        versionCode 1
+        versionName version
+        consumerProguardFiles 'src/rules/base.pro',
+                'src/rules/gson.pro',
+                'src/rules/butterknife.pro',
+                'src/rules/otto.pro',
+                'src/rules/framework.pro'
+    }
+    buildTypes {
+        debug {
+            runProguard false
+        }
+    }
+}
+

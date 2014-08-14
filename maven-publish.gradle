@@ -1,0 +1,95 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+def isReleaseBuild() {
+    return !version.contains("SNAPSHOT")
+}
+
+def sonatypeRepositoryUrl
+
+if (isReleaseBuild()) {
+    println 'RELEASE BUILD'
+    sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+} else {
+    println 'DEBUG BUILD'
+    sonatypeRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+}
+
+ext {
+    nexusUsername = ext.has('nexusUsername') ? ext.nexusUsername : 'not-set'
+    nexusPassword = ext.has('nexusPassword') ? ext.nexusPassword : 'not-set'
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { deployment -> signing.signPom(deployment) }
+
+                pom.packaging = "aar"
+
+                repository(url: sonatypeRepositoryUrl) {
+                    authentication(userName: nexusUsername, password: nexusPassword)
+                }
+
+                pom.project {
+                    parent {
+                        groupId = "org.sonatype.oss"
+                        artifactId = "oss-parent"
+                        version = "7"
+                    }
+
+                    name 'Squadleader'
+                    packaging 'aar'
+                    description 'Android library that provides annotations and common rules to auto configure ProGuard'
+                    url 'https://bitbucket.org/littlerobots/squadleader'
+
+                    scm {
+                        url "https://bitbucket.org/littlerobots/squadleader"
+                        connection "ssh://hg@bitbucket.org/littlerobots/squadleader"
+                    }
+
+                    licenses {
+                        license {
+                            name "Unlicense"
+                            url "http://unlicense.org"
+                            distribution "http://unlicense.org"
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id "hvisser"
+                            name "Hugo Visser"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    signing {
+        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
+
+    task androidJavadocs(type: Javadoc) {
+        source = android.sourceSets.main.java
+    }
+
+    task androidJavadocsJar(type: Jar) {
+        classifier = 'javadoc'
+        from androidJavadocs.outputs
+    }
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java
+    }
+    // package both aar and jar
+    artifacts {
+        archives bundleRelease
+        archives androidSourcesJar
+        archives androidJavadocsJar
+    }
+}
