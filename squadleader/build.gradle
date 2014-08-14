@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
-apply from: '../maven-publish.gradle'
 
 version = "1.0-SNAPSHOT"
+
+group = 'nl.littlerobots.squadleader'
 
 android {
     compileSdkVersion 20
@@ -26,3 +27,4 @@ android {
     }
 }
 
+apply from: '../maven-publish.gradle'
