@@ -5,14 +5,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 
+import com.f2prateek.dart.InjectExtra;
+import com.squareup.okhttp.OkHttpClient;
 import com.squareup.otto.Produce;
 import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import icepick.Icicle;
 import nl.littlerobots.squadleader.Keep;
+import retrofit.RestAdapter.Builder;
 
 public class MyActivity extends Activity {
+
+    @Icicle
+    String icepickString;
+    @InjectExtra("test")
+    String dartString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +29,8 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
         // need a reference because otherwise ProGuard will strip out KeepFieldsTester
         KeepFieldsTester object = new KeepFieldsTester();
+        OkHttpClient client = new OkHttpClient();
+        RetrofitTester service = new Builder().setEndpoint("http://www.test.com").build().create(RetrofitTester.class);
     }
 
     @Subscribe

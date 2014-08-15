@@ -18,7 +18,13 @@ android {
                 'src/rules/gson.pro',
                 'src/rules/butterknife.pro',
                 'src/rules/otto.pro',
-                'src/rules/framework.pro'
+                'src/rules/framework.pro',
+                'src/rules/bundles.pro',
+                'src/rules/icepick.pro',
+                'src/rules/android-dart.pro',
+                'src/rules/okio.pro',
+                'src/rules/retrofit.pro',
+                'src/rules/okhttp.pro'
     }
     buildTypes {
         debug {
