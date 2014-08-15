@@ -1,4 +1,4 @@
-# Rules for Retrofit
+# Rules for Retrofit http://square.github.io/retrofit/
 -dontwarn retrofit.RxSupport
 -dontwarn retrofit.RxSupport$*
 -dontwarn retrofit.appengine.**
