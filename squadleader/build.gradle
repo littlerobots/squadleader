@@ -24,7 +24,8 @@ android {
                 'src/rules/android-dart.pro',
                 'src/rules/okio.pro',
                 'src/rules/retrofit.pro',
-                'src/rules/okhttp.pro'
+                'src/rules/okhttp.pro',
+                'src/rules/eventbus.pro'
     }
     buildTypes {
         debug {

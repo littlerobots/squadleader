@@ -47,6 +47,10 @@ public class MyActivity extends Activity {
     public void testKeepMethod() {
     }
 
+    public void onEvent(String dummy) {
+
+    }
+
     static final class ButterknifeTarget {
         @InjectView(R.id.test)
         View mTestView;
