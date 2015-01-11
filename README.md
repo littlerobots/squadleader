@@ -67,6 +67,9 @@ For libraries that are published as a jar contributions are welcome. When contri
 
 It's also OK to create an issue if the above is too challenging.
 
+### Related projects ###
+The [android proguard snippets](https://github.com/krschultz/android-proguard-snippets) project already has collected a bunch of ProGuard files to include manually in your project. If you are missing a recipe in Squad Leader, check out that project and file an issue if a particular recipe should be added to this library.
+
 ### Get in touch ###
 Hit me up on [Google+](https://google.com/+hugovisser), [Twitter](https://twitter.com/botteaap) or through the contact page on the [Little Robots website](http://littlerobots.nl).
 
